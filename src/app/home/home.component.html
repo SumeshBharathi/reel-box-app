@@ -21,13 +21,37 @@
 </div>
     
 
-      <div class="row mt-2" id="details" style="display: none;">
+      <div class="row mt-2" id="details" style="display: nonee;">
           <div class="col-md-6 mt-5">
              <h3> Movie details: </h3>
               <div class="text-center">
               <img src="https://www.filmibeat.com/ph-big/2011/11/nanban_13226425247.jpg" class="mt-4" alt="" width="40%"><br>
-              <button type="button" class="btn btn-info m-3">Add this to card</button></div>
+              <button type="button" (click)="add()" class="btn btn-info m-3">Add this to list</button></div>
+          </div>
+          <div class="col-sm-6 mt-5">
+            <h3>Movies list</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Movie name</th>
+                  <th scope="col">Director</th>
+                  <th scope="col">Released on</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let val of arr;index as i" >  
+                  <td>{{i+1}}</td>
+                  <td>{{val.id}}</td>  
+                  <td>{{val.name}}</td>
+                  <td>dummy</td>
+                  <td (click)="remove(i)">x</td>
+                  
+              </tr>  
+              </tbody>
+            </table>
           </div>
       </div>
 </div>
 </div>
+
