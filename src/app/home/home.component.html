@@ -1,7 +1,7 @@
 <div class="container p-5">
   <div class="col m-2">
     <div class="row">
-      <div class="input-group mb-3">
+      <div *ngIf="collection.length < 3" class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">Movie</span>
         </div>
@@ -20,23 +20,16 @@
    </ul></pre>
       </div>
     </div>
-
-    <div *ngIf="activeMovie[0] && activeMovie[0].title" class="row mt-2" id="details">
-      <div class="col-md-6 mt-5">
-        <h3> Movie details: {{activeMovie[0].title}}</h3>
-        <div class="text-center">
-          <img src="{{activeMovie[0].poster}}" class="mt-4" alt="" width="40%"><br>
-          <button type="button" class="btn btn-info m-3">Add this to card</button></div>
-      </div>
-    </div>
   </div>
 </div>
 <div class="row mt-2" id="details" style="display: nonee;">
-  <div class="col-md-6 mt-5">
-    <h3> Movie details: </h3>
-    <div class="text-center">
-      <img src="https://www.filmibeat.com/ph-big/2011/11/nanban_13226425247.jpg" class="mt-4" alt="" width="40%"><br>
-      <button type="button" (click)="add()" class="btn btn-info m-3">Add this to list</button></div>
+  <div *ngIf="activeMovie[0] && activeMovie[0].title" class="row mt-2" id="details">
+    <div class="col-md-6 mt-5">
+      <h3> Movie details: {{activeMovie[0].title}}</h3>
+      <div class="text-center">
+        <img src="{{activeMovie[0].poster}}" class="mt-4" alt="" width="40%"><br>
+        <button type="button" (click)="add(activeMovie[0])" class="btn btn-info m-3">Add this to card</button></div>
+    </div>
   </div>
   <div class="col-sm-6 mt-5">
     <h3>Movies list</h3>
@@ -45,20 +38,22 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Movie name</th>
-          <th scope="col">Director</th>
-          <th scope="col">Released on</th>
+          <th scope="col">Language</th>
+          <th scope="col">Rating</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let val of arr;index as i">
+        <tr *ngFor="let val of collection;index as i">
           <td>{{i+1}}</td>
-          <td>{{val.id}}</td>
           <td>{{val.name}}</td>
-          <td>dummy</td>
-          <td (click)="remove(i)">x</td>
+          <td>{{val.language}}</td>
+          <td>{{val.rating}}</td>
+          <td (click)="removeFromCollection(i)">x</td>
 
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<button *ngIf="collection.length > 0 && collection.length < 4" type="button" (click)="add(activeMovie[0])" class="btn btn-info m-3">Create & Share</button>
