@@ -1,57 +1,64 @@
 <div class="container p-5">
-    <div class="col m-2">
-        <div class="row">
-    <div class="input-group mb-3">
+  <div class="col m-2">
+    <div class="row">
+      <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">Movie</span>
         </div>
-        <input type="text" class="form-control" placeholder="Enter atleast 3 characters" id="basic-url" aria-describedby="basic-addon3" onclick="document.getElementById('suggestions').style.display='flex';document.getElementById('suggestionsimg').style.display='flex';">
+        <input type="text" class="form-control" placeholder="Enter atleast 3 characters" id="basic-url"
+          aria-describedby="basic-addon3"
+          onclick="document.getElementById('suggestions').style.display='flex';document.getElementById('suggestionsimg').style.display='flex';"
+          name="searchBox" [(ngModel)]="searchBox" (ngModelChange)="this.movieSuggestions.next($event)">
       </div>
-</div>
-<!-- <div><img id="suggestionsimg" style="visibility: hidden;" src="https://pixelpapa.com/wp-content/uploads/2018/11/10.gif" width="200px" alt=""></div> -->
-<div class="row"><div class="col-sm-1"></div>
-<div class="col">
- <pre class="pl-2 ml-2" ><ul class="list-group" id="suggestions" style="display: none;">
-     <li class="list-group-item" onclick="document.getElementById('basic-url').value ='justo odio';document.getElementById('suggestions').style.display='none';document.getElementById('details').style.display='inherit';document.getElementById('suggestionsimg').style.display='none';" onmouseover="this.style.background='#CAC3C2 ';" onmouseout="this.style.background='white';"> <img src="https://www.filmibeat.com/ph-big/2011/11/nanban_13226425247.jpg" width="30px" alt=""> justo odio</li>
-     <li class="list-group-item" onclick="document.getElementById('basic-url').value ='justo odio';document.getElementById('suggestions').style.display='none';" onmouseover="this.style.background='#CAC3C2 ';" onmouseout="this.style.background='white';"> <img src="https://www.filmibeat.com/ph-big/2011/11/nanban_13226425247.jpg" width="30px" alt=""> Dapibus ac facilisis in</li>
-     <li class="list-group-item" onclick="document.getElementById('basic-url').value ='justo odio';document.getElementById('suggestions').style.display='none';" onmouseover="this.style.background='#CAC3C2 ';" onmouseout="this.style.background='white';"> <img src="https://www.filmibeat.com/ph-big/2011/11/nanban_13226425247.jpg" width="30px" alt=""> Morbi leo risus</li>
-     <li class="list-group-item" onclick="document.getElementById('basic-url').value ='justo odio';document.getElementById('suggestions').style.display='none';" onmouseover="this.style.background='#CAC3C2 ';" onmouseout="this.style.background='white';"> <img src="https://www.filmibeat.com/ph-big/2011/11/nanban_13226425247.jpg" width="30px" alt=""> Porta ac consectetur ac</li>
-     <li class="list-group-item" onclick="document.getElementById('basic-url').value ='justo odio';document.getElementById('suggestions').style.display='none';" onmouseover="this.style.background='#CAC3C2 ';" onmouseout="this.style.background='white';"> <img src="https://www.filmibeat.com/ph-big/2011/11/nanban_13226425247.jpg" width="30px" alt=""> Vestibulum at eros</li>
-   </ul></pre></div>
-</div>
-    
-
-      <div class="row mt-2" id="details" style="display: nonee;">
-          <div class="col-md-6 mt-5">
-             <h3> Movie details: </h3>
-              <div class="text-center">
-              <img src="https://www.filmibeat.com/ph-big/2011/11/nanban_13226425247.jpg" class="mt-4" alt="" width="40%"><br>
-              <button type="button" (click)="add()" class="btn btn-info m-3">Add this to list</button></div>
-          </div>
-          <div class="col-sm-6 mt-5">
-            <h3>Movies list</h3>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Movie name</th>
-                  <th scope="col">Director</th>
-                  <th scope="col">Released on</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let val of arr;index as i" >  
-                  <td>{{i+1}}</td>
-                  <td>{{val.id}}</td>  
-                  <td>{{val.name}}</td>
-                  <td>dummy</td>
-                  <td (click)="remove(i)">x</td>
-                  
-              </tr>  
-              </tbody>
-            </table>
-          </div>
+    </div>
+    <!-- <div><img id="suggestionsimg" style="visibility: hidden;" src="https://pixelpapa.com/wp-content/uploads/2018/11/10.gif" width="200px" alt=""></div> -->
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col">
+        <pre class="pl-2 ml-2"><ul class="list-group" id="suggestions" style="display: none;">
+  <li *ngFor="let item of movieList; let i = index;" class="list-group-item" onclick="document.getElementById('suggestions').style.display='none'; document.getElementById('details').style.display='inherit'; document.getElementById('suggestionsimg').style.display='none';"  onmouseover="this.style.background='#CAC3C2 ';"  onmouseout="this.style.background='white';" (click)="showActiveMovie(item)">  <img src="{{movieList[i].poster}}" width="30px" alt=""> {{movieList[i].title}}</li>
+   </ul></pre>
       </div>
-</div>
-</div>
+    </div>
 
+    <div *ngIf="activeMovie[0] && activeMovie[0].title" class="row mt-2" id="details">
+      <div class="col-md-6 mt-5">
+        <h3> Movie details: {{activeMovie[0].title}}</h3>
+        <div class="text-center">
+          <img src="{{activeMovie[0].poster}}" class="mt-4" alt="" width="40%"><br>
+          <button type="button" class="btn btn-info m-3">Add this to card</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-2" id="details" style="display: nonee;">
+  <div class="col-md-6 mt-5">
+    <h3> Movie details: </h3>
+    <div class="text-center">
+      <img src="https://www.filmibeat.com/ph-big/2011/11/nanban_13226425247.jpg" class="mt-4" alt="" width="40%"><br>
+      <button type="button" (click)="add()" class="btn btn-info m-3">Add this to list</button></div>
+  </div>
+  <div class="col-sm-6 mt-5">
+    <h3>Movies list</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Movie name</th>
+          <th scope="col">Director</th>
+          <th scope="col">Released on</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let val of arr;index as i">
+          <td>{{i+1}}</td>
+          <td>{{val.id}}</td>
+          <td>{{val.name}}</td>
+          <td>dummy</td>
+          <td (click)="remove(i)">x</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
