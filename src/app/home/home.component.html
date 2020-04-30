@@ -1,45 +1,50 @@
-<div class="container p-5">
+<div class="container p-3 text-center" style="font-family: 'Manrope', sans-serif;">
+    <h2 class="m-3">Movie Challenger <img src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/Movie-Studio-icon.png" class="swingimage" width="100px%" alt=""></h2>
+
   <div class="col m-2">
     <div class="row">
       <div *ngIf="collection.length < 3" class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">Movie</span>
         </div>
-        <input type="text" class="form-control" placeholder="Enter atleast 3 characters" id="basic-url"
+        <input type="text" class="form-control" placeholder="Type here" id="basic-url"
           aria-describedby="basic-addon3"
           onclick="document.getElementById('suggestions').style.display='flex';document.getElementById('suggestionsimg').style.display='flex';"
           name="searchBox" [(ngModel)]="searchBox" (ngModelChange)="this.movieSuggestions.next($event)">
+          
       </div>
     </div>
     <!-- <div><img id="suggestionsimg" style="visibility: hidden;" src="https://pixelpapa.com/wp-content/uploads/2018/11/10.gif" width="200px" alt=""></div> -->
-    <div class="row">
+    <div class="row text-left">
       <div class="col-sm-1"></div>
       <div class="col">
         <pre class="pl-2 ml-2"><ul class="list-group" id="suggestions" style="display: none;">
-  <li *ngFor="let item of movieList; let i = index;" class="list-group-item" onclick="document.getElementById('suggestions').style.display='none'; document.getElementById('details').style.display='inherit'; document.getElementById('suggestionsimg').style.display='none';"  onmouseover="this.style.background='#CAC3C2 ';"  onmouseout="this.style.background='white';" (click)="showActiveMovie(item)">  <img src="{{movieList[i].poster}}" width="30px" alt=""> {{movieList[i].title}}</li>
+  <li *ngFor="let item of movieList; let i = index;" class="list-group-item" onclick="document.getElementById('suggestions').style.display='none'; document.getElementById('details').style.display='inherit'; document.getElementById('suggestionsimg').style.display='none';"  onmouseover="this.style.background='#CAC3C2 ';"  onmouseout="this.style.background='white';"
+   (click)="open(content,item)">  <img src="{{movieList[i].poster}}" width="30px" alt=""> {{movieList[i].title}}</li>
    </ul></pre>
       </div>
     </div>
   </div>
-</div>
+
 <div class="row mt-2" id="details" style="display: nonee;">
-  <div *ngIf="activeMovie[0] && activeMovie[0].title" class="row mt-2" id="details">
+  <!-- <div *ngIf="activeMovie[0] && activeMovie[0].title" class="row mt-2" id="details">
     <div class="col-md-6 mt-5">
       <h3> Movie details: {{activeMovie[0].title}}</h3>
       <div class="text-center">
         <img src="{{activeMovie[0].poster}}" class="mt-4" alt="" width="40%"><br>
         <button type="button" (click)="add(activeMovie[0])" class="btn btn-info m-3">Add this to card</button></div>
     </div>
-  </div>
-  <div class="col-sm-6 mt-5">
-    <h3>Movies list</h3>
-    <table class="table">
+  </div> -->
+  <div class="col mt-5">
+    <h3>Movies list </h3>(Max of 5)
+    <table class="table m-2">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Movie name</th>
           <th scope="col">Language</th>
           <th scope="col">Rating</th>
+          <th scope="col"> </th>
         </tr>
       </thead>
       <tbody>
@@ -48,7 +53,7 @@
           <td>{{val.name}}</td>
           <td>{{val.language}}</td>
           <td>{{val.rating}}</td>
-          <td (click)="removeFromCollection(i)">x</td>
+          <td id="del" (click)="removeFromCollection(i)"><img src="assets/delete.png" width="25" alt=""></td>
 
         </tr>
       </tbody>
@@ -57,3 +62,32 @@
 </div>
 
 <button *ngIf="collection.length > 0 && collection.length < 4" type="button" (click)="add(activeMovie[0])" class="btn btn-info m-3">Create & Share</button>
+
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Movie details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group" style="align-items: center;">
+        <label for="dateOfBirth">Movie : {{activeMovie[0].title}}</label>
+        <div class="input-group text-center" style="align-content: center;">
+          <img src="{{activeMovie[0].poster}}" class="mt-4 p-3" alt="" width="80%">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+    <button type="button" class="btn btn-info m-3" (click)="modal.close('Save click');add(activeMovie[0])">Add to Movie list</button>
+  </div>
+</ng-template>
+
+<!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->
+
+<hr>
