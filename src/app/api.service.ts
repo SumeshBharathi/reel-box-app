@@ -17,4 +17,29 @@ export class ApiService {
       return err;
     });
   }
+
+  postApiCall(apiUrl, payload): Promise<void | object> {
+    const token = localStorage.getItem('token');
+    let httpOptions;
+    if (token !== null) {
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'token': token
+        })
+      };
+    } else {
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+    }
+
+    return this.http.post(apiUrl, payload, httpOptions).toPromise().then(res => {
+      return res;
+    }).catch(err => {
+      return err;
+    });
+  }
 }

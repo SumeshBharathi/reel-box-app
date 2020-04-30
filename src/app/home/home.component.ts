@@ -5,7 +5,6 @@ import { ApiService } from '../api.service';
 import { environment } from 'src/environments/environment';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,12 +20,12 @@ export class HomeComponent implements OnInit {
   collection = [];
 
   constructor(
-    private api: ApiService, private modalService: NgbModal
+    private api: ApiService,
+    private modalService: NgbModal
   ) {
     this.showSearchLoader = true;
     this.movieSuggestions.pipe(
-      debounceTime(1200),
-      distinctUntilChanged())
+      debounceTime(1200))
       .subscribe(searchText => {
         if (searchText.length > 0) {
           this.getSearchSuggestions(searchText);
@@ -42,6 +41,19 @@ export class HomeComponent implements OnInit {
       name: movie.title,
       language: movie.language,
       rating: movie.imdbrating
+    });
+  }
+
+  createCollection(collection) {
+    console.log('collection', collection);
+    const data = {
+      collection: collection
+    };
+
+    this.api.postApiCall(environment.apiBaseUrl + '/create_collection', data).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
     });
   }
 
