@@ -14,10 +14,9 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit () {
+    // TODO: have to add one more condition for collection listing page
     if (!localStorage.getItem('token')) {
-      this.router.navigate(['/new-user']);
-    } else {
-      this.router.navigate(['/']);
+      this.router.navigate(['/signup']);
     }
   }
 }

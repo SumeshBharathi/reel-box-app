@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-share',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./share.component.css']
 })
 export class ShareComponent implements OnInit {
-  weblink = 'Gumthu.com/ashuuu';
+  weblink: any;
   btnVal = 'Copy to clipboard';
-  constructor() {
+  constructor (
+    private route: ActivatedRoute
+  ) {
+    this.weblink = 'http://localhost:4200/collections/' + this.route.snapshot.paramMap.get('id');
   }
+
   copyText(val: string) {
     let selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';

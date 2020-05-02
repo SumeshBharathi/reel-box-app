@@ -4,6 +4,7 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { ApiService } from '../api.service';
 import { environment } from 'src/environments/environment';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) {
     this.showSearchLoader = true;
     this.movieSuggestions.pipe(
@@ -52,6 +54,9 @@ export class HomeComponent implements OnInit {
 
     this.api.postApiCall(environment.apiBaseUrl + '/create_collection', data).then(res => {
       console.log(res);
+      if (Object(res).msg === 'Collection created' && Object(res).id) {
+        this.router.navigate(['/share/' + Object(res).id]);
+      }
     }).catch(err => {
       console.log(err);
     });

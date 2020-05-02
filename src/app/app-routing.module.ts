@@ -4,9 +4,11 @@ import { HomeComponent } from './home/home.component';
 import { NewuserComponent } from './newuser/newuser.component';
 import { ShareComponent } from './share/share.component';
 
-const routes: Routes = [{ path: '', component: HomeComponent},
-{ path: 'new-user', component: NewuserComponent},
-{ path: 'share-link', component: ShareComponent}];
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'signup', component: NewuserComponent },
+  { path: 'share/:id', component: ShareComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
