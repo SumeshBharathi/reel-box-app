@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./challenge.component.css']
 })
 export class ChallengeComponent implements OnInit {
-
+  showSpinnerCollection = true;
   collection: any;
   title = 'Have a look at my favourite movie collections';
 
@@ -22,6 +22,7 @@ export class ChallengeComponent implements OnInit {
         this.title = 'No collection found for the given url';
       } else {
         this.collection = Object(res).data;
+        this.showSpinnerCollection = false;
       }
     });
   }

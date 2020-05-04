@@ -34,3 +34,6 @@ padding-left: 55px!important;
     }
 }
 
+html, body {
+    overflow: auto;
+}

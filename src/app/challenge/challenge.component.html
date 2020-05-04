@@ -3,7 +3,14 @@
   <div class="container-fluid p-4" style="font-family: 'Manrope', sans-serif;">
     <div class="text-center">
       <h2 class="font">{{title}}</h2><br>
+      <div class="text-center">
+        <div *ngIf="showSpinnerCollection === true" class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+            
       <div class="row text-center">
+        
 <div class="col-sm-1"></div>
         <div class="col-sm-4 text-center"  >
             <div  *ngFor="let item of collection; let i = index;">
@@ -73,15 +80,15 @@
                   <!-- daddy please check css -->
                   <div class="stats">
                     <div>
-                      <div class="title">Awards</div>
+                      <div class="title">Runtime</div>
                       <i class="fa fa-trophy"></i>
-                      <div class="value">{{collection[i].awards}}</div>
+                      <div class="value">{{collection[i].runtime}}</div>
                     </div>
   
                     <div>
-                      <div class="title">Runtime</div>
+                      <div class="title">Year</div>
                       <i class="fa fa-group"></i>
-                      <div class="value">{{collection[i].runtime}}</div>
+                      <div class="value">{{collection[i].year}}</div>
                     </div>
                     <!-- <div>
                     <div class="title">Language</div>

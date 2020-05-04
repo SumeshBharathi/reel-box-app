@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   movieSuggestions = new Subject<string>();
   showSearchSpinner = false;
+  showSpinner = false;
   searchBox: string;
   movieList = [];
   activeMovie = [];
@@ -74,6 +75,7 @@ export class HomeComponent implements OnInit {
   }
 
   createCollection(collection) {
+    this.showSpinner = true;
     const data = {
       collection: collection
     };
