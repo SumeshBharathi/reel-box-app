@@ -39,35 +39,16 @@ export class HomeComponent implements OnInit {
     this.activeMovie = [];
     this.searchBox = '';
     this.movieList = [];
-    
-    let actor;
-    if (movie.actors) {
-      actor = movie.actors[0];
-    }
-
-    let director;
-    if (movie.director) {
-      director = movie.director[0];
-    };
-
-    let genres = '';
-    if (movie.genre) {
-      for (let i = 0; i < Object.keys(movie.genre).length; i++) {
-        genres += movie.genre[i] + ',';
-      };
-      genres = genres.substring(0, genres.length - 1);
-    }
 
     this.collection.push({
       name: movie.title,
       language: movie.language,
       rating: movie.imdbrating,
       year: movie.year,
-      actors: actor,
-      directors: director,
+      actors: movie.actor,
+      directors: movie.director,
       plot: movie.plot,
       runtime: movie.runtime,
-      genre: genres,
       awards: movie.awards,
       poster: movie.poster
     });
@@ -99,6 +80,8 @@ export class HomeComponent implements OnInit {
     if (item.id !== 'not found') {
       return this.api.getApiCall(environment.apiBaseUrl + '/search_with_id?id=' + item.id).then(res => {
         this.activeMovie = Object(res).data;
+        Object(this.activeMovie[0]).director = Object(res).data[0].director[0];
+        Object(this.activeMovie[0]).actor = Object(res).data[0].actors[0];
 
         return this.activeMovie;
       });

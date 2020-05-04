@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class ChallengeComponent implements OnInit {
 
   collection: any;
-  title = 'Have a look at my favourite movie collections';
+  title: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,6 +21,7 @@ export class ChallengeComponent implements OnInit {
       if (Object(res).data === 'No collections found') {
         this.title = 'No collection found for the given url';
       } else {
+        this.title = 'Have a look at ' + Object(res).data[0].user_name_ + `'s favourite movie collections`;
         this.collection = Object(res).data;
       }
     });
