@@ -1,57 +1,57 @@
-<div class="container p-4" style="font-family: 'Manrope', sans-serif;">
-  <div class="text-center">
-    <h2>Have a look at my favourite movie collections</h2><br>
-    <img width="20%" src="https://www.designerpeople.com/wp-content/uploads/2019/10/3D-animated-logo-design-1.gif"
-      alt="">
-    <div class="row" *ngFor="let item of collection; let i = index;">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="additional">
-            <div class="user-card">
-              <img width="150px"
-                src="{{collection[i].poster}}"
-                alt="">
-            </div>
-            <div class="more-info">
-              <h1>{{collection[i].name}}</h1>
-              <div class="coords">
-                <span>Directors: {{collection[i].directors}}</span>
+<body style="background-color: rgb(221, 216, 216);">
+  <div class="container p-4" style="font-family: 'Manrope', sans-serif;">
+    <div class="text-center">
+      <h2>Have a look at my favourite movie collections</h2><br>
+      <img width="20%" src="https://www.designerpeople.com/wp-content/uploads/2019/10/3D-animated-logo-design-1.gif"
+        alt="">
+      <div class="row" *ngFor="let item of collection; let i = index;">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="additional">
+              <div class="user-card">
+                <img width="150px" src="{{collection[i].poster}}" alt="">
               </div>
-              <div class="coords">
-                <span>Actors: {{collection[i].actors}}</span>
-              </div>
-              <!-- <div class="coords">
+              <div class="more-info">
+                <h1>{{collection[i].name}}</h1>
+                <div class="coords">
+                  <span>Directors: {{collection[i].directors}}</span>
+                </div>
+                <div class="coords">
+                  <span>Actors: {{collection[i].actors}}</span>
+                </div>
+                <!-- <div class="coords">
                 <span>(Genre){{collection[i].genre}}</span>
               </div> -->
-              <!-- daddy please check css -->
-              <div class="stats">
-                <div>
-                  <div class="title">Awards</div>
-                  <i class="fa fa-trophy"></i>
-                  <div class="value">{{collection[i].awards}}</div>
-                </div>
+                <!-- daddy please check css -->
+                <div class="stats">
+                  <div>
+                    <div class="title">Awards</div>
+                    <i class="fa fa-trophy"></i>
+                    <div class="value">{{collection[i].awards}}</div>
+                  </div>
 
-                <div>
-                  <div class="title">Runtime</div>
-                  <i class="fa fa-group"></i>
-                  <div class="value">{{collection[i].runtime}}</div>
-                </div>
-                <!-- <div>
+                  <div>
+                    <div class="title">Runtime</div>
+                    <i class="fa fa-group"></i>
+                    <div class="value">{{collection[i].runtime}}</div>
+                  </div>
+                  <!-- <div>
                   <div class="title">Language</div>
                   <i class="fa fa-coffee"></i>
                   <div class="value">{{collection[i].language}}</div>
                 </div> -->
-                <!-- daddy please check, if we have more than one lang, css is collapsing -->
+                  <!-- daddy please check, if we have more than one lang, css is collapsing -->
+                </div>
               </div>
             </div>
-          </div>
-          <div class="general">
-            <h1>{{collection[i].name}}</h1>
-            <p>{{collection[i].plot}}</p>
+            <div class="general">
+              <h1>{{collection[i].name}}</h1>
+              <p>{{collection[i].plot}}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </div><br>
-    Waana create a one for you? <a href="new-user">Visit here!</a>
+      </div><br>
+      Waana create a one for you? <a href="new-user">Visit here!</a>
+    </div>
   </div>
-</div>
+</body>
