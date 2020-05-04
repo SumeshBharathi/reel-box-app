@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 
 export class HomeComponent implements OnInit {
   movieSuggestions = new Subject<string>();
-  showSearchLoader = false;
+  showSearchSpinner = false;
   searchBox: string;
   movieList = [];
   activeMovie = [];
@@ -25,11 +25,11 @@ export class HomeComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router
   ) {
-    this.showSearchLoader = true;
     this.movieSuggestions.pipe(
       debounceTime(1200))
       .subscribe(searchText => {
-        if (searchText.length > 0) {
+        if (searchText.length > 2) {
+          this.showSearchSpinner = true;
           this.getSearchSuggestions(searchText);
         }
       });
@@ -90,24 +90,26 @@ export class HomeComponent implements OnInit {
   }
 
   getSearchSuggestions(searchText) {
-    document.getElementById('spin').style.display = 'initial';
     this.api.getApiCall(environment.apiBaseUrl + '/search_with_keyword?title=' + searchText).then(res => {
+      this.showSearchSpinner = false;
       console.log(Object(res).data);
       this.movieList = Object(res).data;
     }).catch(err => {
+      this.showSearchSpinner = false;
       console.log(err);
     });
-    this.spin();
-
   }
 
   showActiveMovie(item) {
-    this.api.getApiCall(environment.apiBaseUrl + '/search_with_id?id=' + item.id).then(res => {
-      console.log(Object(res).data);
-      this.activeMovie = Object(res).data;
-    }).catch(err => {
-      console.log(err);
-    });
+    this.activeMovie = [];
+    if (item.id !== 'not found') {
+      this.api.getApiCall(environment.apiBaseUrl + '/search_with_id?id=' + item.id).then(res => {
+        console.log(Object(res).data);
+        this.activeMovie = Object(res).data;
+      }).catch(err => {
+        console.log(err);
+      });
+    }
   }
 
   removeFromCollection(argument) {
@@ -132,14 +134,6 @@ export class HomeComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-  spin() {
-    setTimeout(() => {
-      document.getElementById('spin').style.display = 'none';
-    },
-      2000);
-  }
-
 
   ngOnInit() {
   }
