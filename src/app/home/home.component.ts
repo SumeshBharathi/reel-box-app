@@ -39,10 +39,44 @@ export class HomeComponent implements OnInit {
     this.activeMovie = [];
     this.searchBox = '';
     this.movieList = [];
+    // console.log('movie.actors',movie.actors, Object(movie.actors).length, Object.keys(movie.actors).length,);
+    
+    let actors = '';
+    if (movie.actors) {
+      for (let i = 0; i < Object.keys(movie.actors).length; i++) {
+        actors += movie.actors[i] + ',';
+      };
+      actors = actors.substring(0, actors.length - 1);
+    }
+
+    let directors = '';
+    if (movie.director) {
+      for (let i = 0; i < Object.keys(movie.director).length; i++) {
+        directors += movie.director[i] + ',';
+      };
+      directors = directors.substring(0, directors.length - 1);
+    }
+
+    let genres = '';
+    if (movie.genre) {
+      for (let i = 0; i < Object.keys(movie.genre).length; i++) {
+        genres += movie.genre[i] + ',';
+      };
+      genres = genres.substring(0, genres.length - 1);
+    }
+
     this.collection.push({
       name: movie.title,
       language: movie.language,
-      rating: movie.imdbrating
+      rating: movie.imdbrating,
+      year: movie.year,
+      actors: actors,
+      directors: directors,
+      plot: movie.plot,
+      runtime: movie.runtime,
+      genre: genres,
+      awards: movie.awards,
+      poster: movie.poster
     });
   }
 

@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signup', component: NewuserComponent },
   { path: 'share/:id', component: ShareComponent },
-  { path: 'challenge', component: ChallengeComponent }
+  { path: 'collections/:id', component: ChallengeComponent }
 ];
 
 @NgModule({

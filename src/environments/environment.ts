@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:1234'
+  apiBaseUrl: 'https://my-movies-collections.herokuapp.com',
+  appBaseUrl: 'http://localhost:4200'
 };
 
 /*
