@@ -30,14 +30,14 @@ html, body {
   position: absolute;
   width: 150px;
   height: 100%;
-  background: linear-gradient(#92bCa6, #A2CCB6);
+  background: linear-gradient(rgb(185, 187, 186), rgb(185, 187, 186));
   transition: width 0.4s;
   overflow: hidden;
   z-index: 2;
 }
 
 .card.green .additional {
-  background: linear-gradient(#92bCa6, #A2CCB6);
+  background: linear-gradient(rgb(185, 187, 186), #A2CCB6);
 }
 
 
@@ -98,7 +98,7 @@ html, body {
 }
 
 .card.green .additional .more-info h1 {
-  color: #224C36;
+  color: rgb(138, 141, 140);
 }
 
 .card .additional .coords {
@@ -108,7 +108,7 @@ html, body {
 }
 
 .card.green .additional .coords {
-  color: #325C46;
+  color: rgb(138, 141, 140);
 }
 
 .card .additional .coords span + span {
@@ -127,7 +127,7 @@ html, body {
 }
 
 .card.green .additional .stats {
-  color: #325C46;
+  color: rgb(138, 141, 140);
 }
 
 .card .additional .stats > div {
@@ -174,4 +174,69 @@ html, body {
   font-size: 0.9em;
 }
 
+.font{
+  font-size: 1.8rem!important;
+}
+.general > h1{
+ 
+  font-size: xx-large;
+}
 
+.general{
+
+  font-size: small;
+margin-top: 10px;
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen
+and (max-width : 600px) {
+
+ 
+
+.general{
+  padding-left: 180px!important;
+  font-size: xx-small;
+margin-top: 10px;
+}
+.general > h1{
+ 
+  font-size: large;
+}
+.font{
+  font-size: 1.2rem!important;
+}
+.card{
+  width: 280px;
+    height: 200px;
+}
+.additional{
+  width: 150px;
+}
+
+
+}
+
+.more-info{
+  
+  margin: 10px;
+}
+.container-fluid{
+  background-color: rgb(221, 216, 216);
+  padding: 10%;
+}
+.more-info > h1{
+  font-size: 1.8rem;
+}
+
+.coords > span{
+font-size: 0.8rem;
+}
+
+.title{
+  font-size: 0.7rem!important;
+}
+
+.value{
+  font-size: 0.7rem!important;
+}
