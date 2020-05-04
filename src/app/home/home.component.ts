@@ -63,13 +63,14 @@ export class HomeComponent implements OnInit {
   }
 
   getSearchSuggestions(searchText) {
+    document.getElementById('spin').style.display = 'initial';
     this.api.getApiCall(environment.apiBaseUrl + '/search_with_keyword?title=' + searchText).then(res => {
       console.log(Object(res).data);
       this.movieList = Object(res).data;
     }).catch(err => {
       console.log(err);
     });
-
+    this.spin();
 
   }
 
@@ -86,7 +87,7 @@ export class HomeComponent implements OnInit {
     this.collection.splice(argument, 1);
   }
   closeResult = 'a';
-  open(content,item) {
+  open(content, item) {
     this.showActiveMovie(item);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -103,6 +104,13 @@ export class HomeComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  spin() {
+    setTimeout(() => {
+      document.getElementById('spin').style.display = 'none';
+    },
+      2000);
   }
 
 
