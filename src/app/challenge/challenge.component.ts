@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./challenge.component.css']
 })
 export class ChallengeComponent implements OnInit {
-
+  showSpinnerCollection = true;
   collection: any;
   title: string;
 
@@ -23,6 +23,7 @@ export class ChallengeComponent implements OnInit {
       } else {
         this.title = 'Have a look at ' + Object(res).data[0].user_name_ + `'s favourite movie collections`;
         this.collection = Object(res).data;
+        this.showSpinnerCollection = false;
       }
     });
   }

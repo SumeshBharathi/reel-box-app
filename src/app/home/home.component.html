@@ -1,7 +1,10 @@
+<body style="background-color: rgb(221, 216, 216);">
+  
+
 <div class="container p-3 text-center" style="font-family: 'Manrope', sans-serif;">
   <h2 class="m-3">Collect your favourite movies
     <br>
-    <img src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/Movie-Studio-icon.png" class="swingimage" width="100px%" alt="">
+    <img src="assets/home-1.png" class="swingimage" width="100px%" alt="">
   </h2>
 
   <div class="col m-2">
@@ -21,10 +24,11 @@
       </div>
     </div>
     <div class="row text-left">
+      <div class="col-sm-1"></div>
       <div class="col">
         <pre class="pl-2 ml-2">
           <ul class="list-group">
-            <li *ngFor="let item of movieList; let i = index;" class="list-group-item" (click)="openPopup(content,item)"> <img src="{{movieList[i].poster}}" width="30px"> {{movieList[i].title}}</li>
+            <li *ngFor="let item of movieList; let i = index;" class="list-group-item" onmouseover="this.style.background='#CAC3C2 ';"  onmouseout="this.style.background='white';" (click)="openPopup(content,item)"> <img src="{{movieList[i].poster}}" width="30px"> {{movieList[i].title}}</li>
           </ul>
         </pre>
       </div>
@@ -58,7 +62,10 @@
     </div>
   </div>
   <button *ngIf="collection.length > 0" type="button" (click)="createCollection(collection)"
-    class="btn btn-info m-3">Create & Share</button>
+    class="btn btn-info m-3">Create & Share 
+    <div *ngIf="showSpinner === true" class="spinner-border spinner-border-sm " role="status">
+      <span class="sr-only">Loading...</span>
+    </div></button>
 </div>
 
 <ng-template #content let-modal>
@@ -86,5 +93,7 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel')">Cancel</button>
     <button type="button" class="btn btn-info m-3" (click)="modal.close('Save');addToList(activeMovie[0])">Add to Movie list</button>
+  
   </div>
 </ng-template>
+</body>
