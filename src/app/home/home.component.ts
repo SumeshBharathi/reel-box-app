@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 import { ApiService } from '../api.service';
 import { environment } from 'src/environments/environment';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 
 export class HomeComponent implements OnInit {
   movieSuggestions = new Subject<string>();
-  showSearchLoader = false;
+  showSearchSpinner = false;
   searchBox: string;
   movieList = [];
   activeMovie = [];
@@ -25,37 +25,30 @@ export class HomeComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router
   ) {
-    this.showSearchLoader = true;
     this.movieSuggestions.pipe(
       debounceTime(1200))
       .subscribe(searchText => {
-        if (searchText.length > 0) {
+        if (searchText.length > 2) {
+          this.showSearchSpinner = true;
           this.getSearchSuggestions(searchText);
         }
       });
   }
 
-  add(movie) {
+  addToList(movie) {
     this.activeMovie = [];
     this.searchBox = '';
     this.movieList = [];
-    // console.log('movie.actors',movie.actors, Object(movie.actors).length, Object.keys(movie.actors).length,);
     
-    let actors = '';
+    let actor;
     if (movie.actors) {
-      for (let i = 0; i < Object.keys(movie.actors).length; i++) {
-        actors += movie.actors[i] + ',';
-      };
-      actors = actors.substring(0, actors.length - 1);
+      actor = movie.actors[0];
     }
 
-    let directors = '';
+    let director;
     if (movie.director) {
-      for (let i = 0; i < Object.keys(movie.director).length; i++) {
-        directors += movie.director[i] + ',';
-      };
-      directors = directors.substring(0, directors.length - 1);
-    }
+      director = movie.director[0];
+    };
 
     let genres = '';
     if (movie.genre) {
@@ -70,8 +63,8 @@ export class HomeComponent implements OnInit {
       language: movie.language,
       rating: movie.imdbrating,
       year: movie.year,
-      actors: actors,
-      directors: directors,
+      actors: actor,
+      directors: director,
       plot: movie.plot,
       runtime: movie.runtime,
       genre: genres,
@@ -81,72 +74,48 @@ export class HomeComponent implements OnInit {
   }
 
   createCollection(collection) {
-    console.log('collection', collection);
     const data = {
       collection: collection
     };
 
     this.api.postApiCall(environment.apiBaseUrl + '/create_collection', data).then(res => {
-      console.log(res);
       if (Object(res).msg === 'Collection created' && Object(res).id) {
         this.router.navigate(['/share/' + Object(res).id]);
       }
-    }).catch(err => {
-      console.log(err);
     });
   }
 
   getSearchSuggestions(searchText) {
-    document.getElementById('spin').style.display = 'initial';
     this.api.getApiCall(environment.apiBaseUrl + '/search_with_keyword?title=' + searchText).then(res => {
-      console.log(Object(res).data);
+      this.showSearchSpinner = false;
       this.movieList = Object(res).data;
     }).catch(err => {
-      console.log(err);
+      this.showSearchSpinner = false;
     });
-    this.spin();
-
   }
 
-  showActiveMovie(item) {
-    this.api.getApiCall(environment.apiBaseUrl + '/search_with_id?id=' + item.id).then(res => {
-      console.log(Object(res).data);
-      this.activeMovie = Object(res).data;
-    }).catch(err => {
-      console.log(err);
-    });
+  showActiveMovie(item): Promise<any> {
+    this.activeMovie = [];
+    if (item.id !== 'not found') {
+      return this.api.getApiCall(environment.apiBaseUrl + '/search_with_id?id=' + item.id).then(res => {
+        this.activeMovie = Object(res).data;
+
+        return this.activeMovie;
+      });
+    }
   }
 
   removeFromCollection(argument) {
     this.collection.splice(argument, 1);
   }
-  closeResult = 'a';
-  open(content, item) {
-    this.showActiveMovie(item);
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+
+  openPopup(content, item) {
+    this.movieList = [];
+    this.searchBox = '';
+    this.showActiveMovie(item).then(() => {
+      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result;
     });
   }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  spin() {
-    setTimeout(() => {
-      document.getElementById('spin').style.display = 'none';
-    },
-      2000);
-  }
-
 
   ngOnInit() {
   }

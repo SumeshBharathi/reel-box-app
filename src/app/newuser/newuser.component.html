@@ -1,11 +1,10 @@
 <body style="background-color:#468AD7">
 <div class="container text-center"  style="font-family: 'Manrope', sans-serif;">
 
-    <div class="col  p-5">
-<img src="https://pngimg.com/uploads/welcome/welcome_PNG78.png" class="m-3" width="230px" alt=""><br>
-<input type="text"  class="form-control " style="display: initial;width: 60%;" placeholder="Kindly enter your name to proceed" id="basic-url"
-        aria-describedby="basic-addon3"
-        name="name" [(ngModel)]="name">
+    <div class="col p-5">
+<img src="https://pngimg.com/uploads/welcome/welcome_PNG78.png" class="m-3" width="230px"><br>
+<input type="text" class="form-control" style="display: initial;width: 60%;" placeholder="Kindly enter your name to proceed" 
+name="name" [(ngModel)]="name">
         
         <button type="button" (click)="createUser()" class="btn btn-info m-3">Proceed</button>
         <br>

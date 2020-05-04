@@ -14,8 +14,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit () {
-    // TODO: have to add one more condition for collection listing page
-    if (!localStorage.getItem('token')) {
+    if (!window.location.pathname.includes('/collections/') && !localStorage.getItem('token')) {
       this.router.navigate(['/signup']);
     }
   }

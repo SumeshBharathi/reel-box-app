@@ -11,16 +11,18 @@ import { environment } from 'src/environments/environment';
 export class ChallengeComponent implements OnInit {
 
   collection: any;
+  title = 'Have a look at my favourite movie collections';
 
   constructor(
     private route: ActivatedRoute,
     private api: ApiService
   ) {
     api.getApiCall(environment.apiBaseUrl + '/collections/' + this.route.snapshot.paramMap.get('id')).then(res => {
-      console.log(res);
-      this.collection = Object(res).data;
-    }).catch(err => {
-      console.log(err);
+      if (Object(res).data === 'No collections found') {
+        this.title = 'No collection found for the given url';
+      } else {
+        this.collection = Object(res).data;
+      }
     });
   }
 

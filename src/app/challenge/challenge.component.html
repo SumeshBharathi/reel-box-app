@@ -2,9 +2,7 @@
 <body style="background-color: rgb(221, 216, 216);">
   <div class="container-fluid p-4" style="font-family: 'Manrope', sans-serif;">
     <div class="text-center">
-      <h2 class="font">Have a look at my favourite movie collections</h2><br>
-      <!-- <img width="20%" src="https://www.designerpeople.com/wp-content/uploads/2019/10/3D-animated-logo-design-1.gif"
-        alt=""> -->
+      <h2 class="font">{{title}}</h2><br>
       <div class="row text-center">
 <div class="col-sm-1"></div>
         <div class="col-sm-4 text-center"  >
@@ -28,15 +26,14 @@
                 <!-- daddy please check css -->
                 <div class="stats">
                   <div>
-                    <div class="title">Awards</div>
-                    <i class="fa fa-trophy"></i>
-                    <div class="value">{{collection[i].awards}}</div>
-                  </div>
-
-                  <div>
                     <div class="title">Runtime</div>
                     <i class="fa fa-group"></i>
                     <div class="value">{{collection[i].runtime}}</div>
+                  </div>
+                  <div>
+                    <div class="title">Year</div>
+                    <i class="fa fa-group"></i>
+                    <div class="value">{{collection[i].year}}</div>
                   </div>
                   <!-- <div>
                   <div class="title">Language</div>
@@ -49,7 +46,7 @@
             </div>
             <div class="general">
               <h1>{{collection[i].name}}</h1>
-              <p>{{collection[i].plot}}</p>
+              <p>{{collection[i].plot | slice:0:170}}</p>
             </div>
           </div>
         </div>
@@ -104,7 +101,7 @@
         </div>
 
       </div><br>
-      Waana create a one for you? <a href="new-user">Visit here!</a>
+      Wanna create your own collection? <a routerLink="/">Visit here!</a>
     </div>
   </div>
 </body>
