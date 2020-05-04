@@ -20,3 +20,17 @@
     animation: swinging 3.5s ease-in-out forwards infinite;
 }
 
+.m-img{
+   margin: 8px;
+    width: 200px;
+        }
+/* Smartphones (portrait) ----------- */
+@media only screen
+and (max-width : 600px) {
+
+    .m-img{
+        width: 250px;
+padding-left: 55px!important;
+    }
+}
+

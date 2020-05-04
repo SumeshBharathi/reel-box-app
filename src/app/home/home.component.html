@@ -62,18 +62,26 @@
 </div>
 
 <ng-template #content let-modal>
-  <div class="modal-header">
+  <div class="modal-header" style="font-family: 'Manrope', sans-serif;">
     <h4 class="modal-title" id="modal-basic-title">Movie details</h4>
   </div>
   <div class="modal-body">
-    <form>
-      <div class="form-group" style="align-items: center;">
-        <label>Name: {{activeMovie[0].title}}</label>
-        <div class="input-group text-center" style="align-content: center;">
-          <img src="{{activeMovie[0].poster}}" class="mt-4 p-3" alt="" width="80%">
-        </div>
-      </div>
-    </form>
+
+<div class="container" style="font-family: 'Manrope', sans-serif;">
+  <div class="row">
+    <div class="col-sm-6"> <img src="{{activeMovie[0].poster}}" class="mt-4 p-3 m-img" alt="" ></div>
+    <div class="col-sm-6"> 
+      <label  class="mt-5"  for="dateOfBirth"><b>Movie : </b>{{activeMovie[0].title}}</label><br>
+      <label for="dateOfBirth"><b>Year : </b>{{activeMovie[0].year}}</label><br>
+      <label for="dateOfBirth"><b>Run time </b>: {{activeMovie[0].runtime}}</label><br>
+      <label for="dateOfBirth"><b>Director :</b> {{activeMovie[0].director}}</label><br>
+      <label for="dateOfBirth"><b>Actor :</b> {{activeMovie[0].actor}}</label><br></div>
+  </div>
+</div>
+
+
+
+    
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel')">Cancel</button>
