@@ -10,13 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShareComponent } from './share/share.component';
+import { ChallengeComponent } from './challenge/challenge.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NewuserComponent,
-    ShareComponent
+    ShareComponent,
+    ChallengeComponent
   ],
   imports: [
     BrowserModule,
