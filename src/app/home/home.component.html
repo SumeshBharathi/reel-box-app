@@ -3,7 +3,7 @@
 
   <div class="col m-2">
     <div class="row">
-      <div *ngIf="collection.length < 3" class="input-group mb-3">
+      <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">Movie &nbsp;
             <div class="spinner-border spinner-border-sm " style="display: none;" id="spin" role="status">
@@ -41,7 +41,7 @@
     </div>
   </div> -->
   <div class="col mt-5">
-    <h3>Movies list </h3>(Max of 5)
+    <h3>Movies list </h3>
     <table class="table m-2">
       <thead>
         <tr>
@@ -66,7 +66,7 @@
   </div>
 </div>
 
-<button *ngIf="collection.length > 0 && collection.length < 4" type="button" (click)="createCollection(collection)" class="btn btn-info m-3">Create & Share</button>
+<button *ngIf="collection.length > 0" type="button" (click)="createCollection(collection)" class="btn btn-info m-3">Create & Share</button>
 
 </div>
 

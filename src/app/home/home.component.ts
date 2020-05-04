@@ -39,23 +39,16 @@ export class HomeComponent implements OnInit {
     this.activeMovie = [];
     this.searchBox = '';
     this.movieList = [];
-    // console.log('movie.actors',movie.actors, Object(movie.actors).length, Object.keys(movie.actors).length,);
     
-    let actors = '';
+    let actor;
     if (movie.actors) {
-      for (let i = 0; i < Object.keys(movie.actors).length; i++) {
-        actors += movie.actors[i] + ',';
-      };
-      actors = actors.substring(0, actors.length - 1);
+      actor = movie.actors[0];
     }
 
-    let directors = '';
+    let director;
     if (movie.director) {
-      for (let i = 0; i < Object.keys(movie.director).length; i++) {
-        directors += movie.director[i] + ',';
-      };
-      directors = directors.substring(0, directors.length - 1);
-    }
+      director = movie.director[0];
+    };
 
     let genres = '';
     if (movie.genre) {
@@ -70,8 +63,8 @@ export class HomeComponent implements OnInit {
       language: movie.language,
       rating: movie.imdbrating,
       year: movie.year,
-      actors: actors,
-      directors: directors,
+      actors: actor,
+      directors: director,
       plot: movie.plot,
       runtime: movie.runtime,
       genre: genres,
