@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 import { ApiService } from '../api.service';
 import { environment } from 'src/environments/environment';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  add(movie) {
+  addToList(movie) {
     this.activeMovie = [];
     this.searchBox = '';
     this.movieList = [];
@@ -74,40 +74,33 @@ export class HomeComponent implements OnInit {
   }
 
   createCollection(collection) {
-    console.log('collection', collection);
     const data = {
       collection: collection
     };
 
     this.api.postApiCall(environment.apiBaseUrl + '/create_collection', data).then(res => {
-      console.log(res);
       if (Object(res).msg === 'Collection created' && Object(res).id) {
         this.router.navigate(['/share/' + Object(res).id]);
       }
-    }).catch(err => {
-      console.log(err);
     });
   }
 
   getSearchSuggestions(searchText) {
     this.api.getApiCall(environment.apiBaseUrl + '/search_with_keyword?title=' + searchText).then(res => {
       this.showSearchSpinner = false;
-      console.log(Object(res).data);
       this.movieList = Object(res).data;
     }).catch(err => {
       this.showSearchSpinner = false;
-      console.log(err);
     });
   }
 
-  showActiveMovie(item) {
+  showActiveMovie(item): Promise<any> {
     this.activeMovie = [];
     if (item.id !== 'not found') {
-      this.api.getApiCall(environment.apiBaseUrl + '/search_with_id?id=' + item.id).then(res => {
-        console.log(Object(res).data);
+      return this.api.getApiCall(environment.apiBaseUrl + '/search_with_id?id=' + item.id).then(res => {
         this.activeMovie = Object(res).data;
-      }).catch(err => {
-        console.log(err);
+
+        return this.activeMovie;
       });
     }
   }
@@ -115,24 +108,13 @@ export class HomeComponent implements OnInit {
   removeFromCollection(argument) {
     this.collection.splice(argument, 1);
   }
-  closeResult = 'a';
-  open(content, item) {
-    this.showActiveMovie(item);
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
+  openPopup(content, item) {
+    this.movieList = [];
+    this.searchBox = '';
+    this.showActiveMovie(item).then(() => {
+      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result;
+    });
   }
 
   ngOnInit() {

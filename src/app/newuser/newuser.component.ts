@@ -19,14 +19,11 @@ export class NewuserComponent implements OnInit {
 
   createUser () {
     this.api.postApiCall(environment.apiBaseUrl + '/new_user', {name: this.name}).then(res => {
-      console.log(res);
       if (res && Object(res).msg === 'User created') {
         localStorage.setItem('token', Object(res).token);
         this.router.navigate(['/']);
       }
-    }).catch(err => {
-      console.log(err);
-    })
+    });
   }
 
   ngOnInit() {
