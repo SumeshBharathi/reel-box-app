@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-share',
@@ -12,7 +13,7 @@ export class ShareComponent implements OnInit {
   constructor (
     private route: ActivatedRoute
   ) {
-    this.weblink = 'http://localhost:4200/collections/' + this.route.snapshot.paramMap.get('id');
+    this.weblink = environment.appBaseUrl + '/collections/' + this.route.snapshot.paramMap.get('id');
   }
 
   copyText(val: string) {

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-challenge',
@@ -7,7 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChallengeComponent implements OnInit {
 
-  constructor() { }
+  collection: any;
+
+  constructor(
+    private route: ActivatedRoute,
+    private api: ApiService
+  ) {
+    api.getApiCall(environment.apiBaseUrl + '/collections/' + this.route.snapshot.paramMap.get('id')).then(res => {
+      console.log(res);
+      this.collection = Object(res).data;
+    }).catch(err => {
+      console.log(err);
+    });
+  }
 
   ngOnInit() {
   }
