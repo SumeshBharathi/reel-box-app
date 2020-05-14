@@ -7,6 +7,9 @@
 # Only exists if Bazel was run
 /bazel-out
 
+#env
+/src/environments/environment.prod.ts
+
 # dependencies
 /node_modules
 
@@ -46,3 +49,5 @@ testem.log
 Thumbs.db
 
 run.sh
+
+.firebase

@@ -1,0 +1,109 @@
+
+<body style="background-color: rgb(221, 216, 216);">
+  <div class="container-fluid p-4" style="font-family: 'Manrope', sans-serif;">
+    <div class="text-center">
+      <h2 class="font">{{title}}</h2><br>
+      <div class="text-center">
+        <div *ngIf="showSpinnerCollection === true" class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+            
+      <div class="row text-center">
+        
+<div class="col-sm-1"></div>
+        <div class="col-sm-4 text-center"  >
+            <div  *ngFor="let item of collection; let i = index;">
+          <div class="card"  *ngIf="i%2===0">
+            <div class="additional">
+              <div class="user-card">
+                <img width="150px" src="{{collection[i].poster}}" alt="">
+              </div>
+              <div class="more-info">
+                <h1>{{collection[i].name_ || 'N/A'}}</h1>
+                <div class="coords">
+                  <span>Director -  {{collection[i].directors || 'N/A'}}</span>
+                </div>
+                <div class="coords">
+                  <span>Actor -  {{collection[i].actors || 'N/A'}}</span>
+                </div>
+                <div class="coords">
+                  <span>Rating: {{collection[i].rating || 'N/A'}}</span>
+                </div>
+                <div class="stats">
+                  <div>
+                    <div class="title">Runtime</div>
+                    <i class="fa fa-group"></i>
+                    <div class="value">{{collection[i].runtime || 'N/A'}}</div>
+                  </div>
+                  <div>
+                    <div class="title">Year</div>
+                    <i class="fa fa-group"></i>
+                    <div class="value">{{collection[i].year_ || 'N/A'}}</div>
+                  </div>
+                  <div>
+                  <div class="title">Language</div>
+                  <i class="fa fa-coffee"></i>
+                  <div class="value">{{collection[i].language_ | slice:0:10}}</div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="general">
+              <h1>{{collection[i].name_ || 'N/A'}}</h1>
+              <p>{{collection[i].plot || 'N/A'}}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+        <div class="col-sm-4" >
+            <div  *ngFor="let item of collection; let i = index;">
+            <div class="card"  *ngIf="i%2!==0">
+              <div class="additional">
+                <div class="user-card">
+                  <img width="150px" src="{{collection[i].poster}}" alt="">
+                </div>
+                <div class="more-info">
+                  <h1>{{collection[i].name_ || 'N/A'}}</h1>
+                  <div class="coords">
+                    <span>Director: {{collection[i].directors || 'N/A'}}</span>
+                  </div>
+                  <div class="coords">
+                    <span>Actor: {{collection[i].actors || 'N/A'}}</span>
+                  </div>
+                  <div class="coords">
+                    <span>Rating: {{collection[i].rating || 'N/A'}}</span>
+                  </div>
+                  <div class="stats">  
+                    <div>
+                      <div class="title">Runtime</div>
+                      <i class="fa fa-group"></i>
+                      <div class="value">{{collection[i].runtime || 'N/A'}}</div>
+                    </div>
+                    <div>
+                      <div class="title">Year</div>
+                      <i class="fa fa-group"></i>
+                      <div class="value">{{collection[i].year_ || 'N/A'}}</div>
+                    </div>
+                    <div>
+                    <div class="title">Language</div>
+                    <i class="fa fa-coffee"></i>
+                    <div class="value">{{collection[i].language_ | slice:0:10}}</div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="general">
+                <h1>{{collection[i].name_ || 'N/A'}}</h1>
+                <p>{{collection[i].plot || 'N/A'}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><br>
+      Wanna create your own collection? <a routerLink="/">Visit here!</a>
+    </div>
+  </div>
+</body>
