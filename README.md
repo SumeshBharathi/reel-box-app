@@ -1,6 +1,6 @@
 # Reel-Box
 
-Reel-Box is a movie collection web application, allows users to share the collection with the friends much easier.
+Reel-Box is a movie collection web application, allows users to share their movie collection with the friends much easier.
 
 ## Installation
 
