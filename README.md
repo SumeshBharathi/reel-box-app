@@ -4,7 +4,7 @@ Reel-Box is a movie collection web application, allows users to share their movi
 
 ## Live
 
-Access live demo of the application here- [https://reel--box.web.app/](https://reel--box.web.app/)
+Access live demo of the application here - [https://reel--box.web.app/](https://reel--box.web.app)
 
 ## Installation
 
