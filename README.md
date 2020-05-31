@@ -29,8 +29,7 @@ npm start /* To start the application */
 - Movie collections page (Collection of movies)
 - Social sharing
 
-For Back-end modules, kindly refer to [this repo.](https://github.com/polydimensional/reel-box-api)
-
+For Back-end source code, kindly refer to [this repo.](https://github.com/polydimensional/reel-box-api)
 
 ## For Queries
 Reach us at [polydimensional.in@gmail.com](mailto:polydimensional.in@gmail.com)
