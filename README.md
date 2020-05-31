@@ -15,10 +15,8 @@ npm start /* To start the application */
 
 ## Tech stack
 - Angular 9
-- NodeJS - API
+- NodeJS(Express) - API
 - Heroku Postgres - Primary Database
-- Angular 9 - Webapp
-- Angular 9 - Extension
 - Firebase - Webapp Deployment
 - Heroku - API Deployment
 
