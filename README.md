@@ -1,27 +1,40 @@
-# Reel Box
+# Reel-Box
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.26.
+Reel-Box is a movie collection web application, allows users to share the collection with the friends much easier.
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Use the package manager [npm](https://npmjs.com/) to install all the required dependencies.
 
-## Code scaffolding
+```bash
+git clone https://github.com/polydimensional/reel-box-app.git
+cd reel-box-app
+npm i
+npm start /* To start the application */
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tech stack
+- Angular 9
+- NodeJS - API
+- Heroku Postgres - Primary Database
+- Angular 9 - Webapp
+- Angular 9 - Extension
+- Firebase - Webapp Deployment
+- Heroku - API Deployment
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Modules
+- New user authentication (Cookie based tokens)
+- Movie search
+- Movie list (Added movie collections)
+- URL generator
+- Movie collections page (Collection of movies)
 
-## Running unit tests
+For Back-end modules, kindly refer to [this repo.](https://github.com/polydimensional/reel-box-api)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## For Queries
+Reach us at [polydimensional.in@gmail.com](mailto:polydimensional.in@gmail.com)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Owned by
+[Polydimensional.in](https://polydimensional.in)
