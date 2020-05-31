@@ -22,7 +22,7 @@ npm start /* To start the application */
 
 
 ## Modules
-- New user authentication (Cookie based tokens)
+- New user authentication
 - Movie search
 - Movie list (Added movie collections)
 - URL generator
@@ -35,5 +35,5 @@ For Back-end modules, kindly refer to [this repo.](https://github.com/polydimens
 ## For Queries
 Reach us at [polydimensional.in@gmail.com](mailto:polydimensional.in@gmail.com)
 
-## Owned by
-[Polydimensional.in](https://polydimensional.in)
+## Developed by
+[Team Polydimensional](https://polydimensional.in)
